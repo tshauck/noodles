@@ -12,10 +12,12 @@ pub(crate) mod sequence;
 mod template_length;
 
 pub(crate) use self::{
-    cigar::get_cigar, data::get_data, position::get_position, quality_scores::get_quality_scores,
+    data::get_data, position::get_position, quality_scores::get_quality_scores,
     read_name::get_read_name, reference_sequence_id::get_reference_sequence_id,
     sequence::get_sequence,
 };
+
+pub use self::cigar::{get_cigar, get_cigar_no_reserve};
 
 use std::{error, fmt, mem};
 

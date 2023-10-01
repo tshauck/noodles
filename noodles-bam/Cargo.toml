@@ -1,14 +1,14 @@
 [package]
-name = "noodles-bam"
-version = "0.46.0"
 authors = ["Michael Macias <zaeleus@gmail.com>"]
-license.workspace = true
-edition.workspace = true
-rust-version = "1.64.0"
 description = "Binary Alignment/Map (BAM) format reader and writer"
-homepage = "https://github.com/zaeleus/noodles"
-repository = "https://github.com/zaeleus/noodles"
 documentation = "https://docs.rs/noodles-bam"
+edition.workspace = true
+homepage = "https://github.com/zaeleus/noodles"
+license.workspace = true
+name = "noodles-bam"
+repository = "https://github.com/zaeleus/noodles"
+rust-version = "1.64.0"
+version = "0.46.0"
 
 [features]
 async = ["dep:futures", "dep:tokio", "noodles-bgzf/async"]
@@ -17,17 +17,23 @@ async = ["dep:futures", "dep:tokio", "noodles-bgzf/async"]
 bit-vec.workspace = true
 byteorder.workspace = true
 bytes.workspace = true
-futures = { workspace = true, optional = true, features = ["std"] }
-tokio = { workspace = true, optional = true, features = ["fs", "io-util"] }
+futures = {workspace = true, optional = true, features = ["std"]}
+tokio = {workspace = true, optional = true, features = ["fs", "io-util"]}
 
-noodles-bgzf = { path = "../noodles-bgzf", version = "0.24.0" }
-noodles-core = { path = "../noodles-core", version = "0.12.0" }
-noodles-csi = { path = "../noodles-csi", version = "0.24.0" }
-noodles-sam = { path = "../noodles-sam", version = "0.43.0" }
+noodles-bgzf = {path = "../noodles-bgzf", version = "0.24.0"}
+noodles-core = {path = "../noodles-core", version = "0.12.0"}
+noodles-csi = {path = "../noodles-csi", version = "0.24.0"}
+noodles-sam = {path = "../noodles-sam", version = "0.43.0"}
 
 [dev-dependencies]
-noodles-sam = { path = "../noodles-sam", version = "0.43.0", features = ["async"] }
-tokio = { workspace = true, features = ["io-std", "macros", "rt-multi-thread"] }
+criterion = "0.5.1"
+noodles-sam = {path = "../noodles-sam", version = "0.43.0", features = ["async"]}
+rand = "0.8.4"
+tokio = {workspace = true, features = ["io-std", "macros", "rt-multi-thread"]}
+
+[[bench]]
+harness = false
+name = "bam_cigar_bench"
 
 [package.metadata.docs.rs]
 features = ["async"]

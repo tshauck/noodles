@@ -112,6 +112,28 @@ pub(super) fn resolve(header: &sam::Header, record: &mut Record) -> Result<(), D
     Ok(())
 }
 
+pub fn get_cigar_no_reserve<B>(
+    src: &mut B,
+    cigar: &mut Cigar,
+    n_cigar_op: usize,
+) -> Result<(), DecodeError>
+where
+    B: Buf,
+{
+    if src.remaining() < mem::size_of::<u32>() * n_cigar_op {
+        return Err(DecodeError::UnexpectedEof);
+    }
+
+    cigar.clear();
+
+    for _ in 0..n_cigar_op {
+        let op = decode_op(src.get_u32_le()).map_err(DecodeError::InvalidOp)?;
+        cigar.as_mut().push(op);
+    }
+
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

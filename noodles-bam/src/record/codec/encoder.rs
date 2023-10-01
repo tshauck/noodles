@@ -8,9 +8,11 @@ mod read_name;
 mod sequence;
 
 pub(crate) use self::{
-    cigar::put_cigar, data::put_data, mapping_quality::put_mapping_quality,
-    quality_scores::put_quality_scores, read_name::put_read_name, sequence::put_sequence,
+    data::put_data, mapping_quality::put_mapping_quality, quality_scores::put_quality_scores,
+    read_name::put_read_name, sequence::put_sequence,
 };
+
+pub use self::cigar::put_cigar;
 
 use std::io;
 
